@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main ]
+    branches: [ slow_kotlin ]
   pull_request:
-    branches: [ main ]
+    branches: [ slow_kotlin ]
 
 jobs:
   build:
