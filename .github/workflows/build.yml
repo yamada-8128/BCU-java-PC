@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: リポジトリのチェックアウト
+    - name: リポジトリのチェックアウト（サブモジュール含む）
       uses: actions/checkout@v4
       with:
         submodules: recursive
@@ -22,11 +22,19 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
 
-    - name: プロジェクトのビルドと fat‑jar の生成
+    - name: Maven キャッシュの復元
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    - name: プロジェクトのビルドと fat-jar の生成
       run: mvn clean package -DskipTests
 
     - name: ビルド成果物をアーティファクトとして保存
       uses: actions/upload-artifact@v4
       with:
-        name: BCU‑java‑PC‑jar
+        name: BCU-java-PC-jar
         path: target/*-jar-with-dependencies.jar
