@@ -1,0 +1,32 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: リポジトリのチェックアウト
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Java 8 をセットアップ
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+
+    - name: プロジェクトのビルドと fat‑jar の生成
+      run: mvn clean package -DskipTests
+
+    - name: ビルド成果物をアーティファクトとして保存
+      uses: actions/upload-artifact@v3
+      with:
+        name: BCU‑java‑PC‑jar
+        path: target/*-jar-with-dependencies.jar
