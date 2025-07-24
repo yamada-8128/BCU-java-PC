@@ -1,4 +1,4 @@
-# Battle Cats Ultimate
+# Battle Cats Ultimate!
 ###### A fan-made program featuring data and animations in The Battle Cats by PONOS, along with custom content.
 ###### Last Written: July 21st, 2024
 
