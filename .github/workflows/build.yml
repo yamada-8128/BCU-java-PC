@@ -26,7 +26,7 @@ jobs:
       run: mvn clean package -DskipTests
 
     - name: ビルド成果物をアーティファクトとして保存
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: BCU‑java‑PC‑jar
         path: target/*-jar-with-dependencies.jar
